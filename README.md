@@ -1,6 +1,6 @@
 # Detect and track ear-biting in pigs.
 
-The eperiments tested two state-of-the-art detection networks namely YOLOv4-CSP and YOLOv7. Both models were written in Pytorch and are available ...
+The experiments tested two state-of-the-art detection networks namely YOLOv4-CSP and YOLOv7. Both models were written in Pytorch and are available ...
 
 We also used DEEPSORT for tracking.
 
