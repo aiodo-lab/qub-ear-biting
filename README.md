@@ -10,5 +10,5 @@ Requirements: imutils 0.5.4, numpy 1.19.5, opencv	4.5.1
 
 REFERENCES:
 
-YOLOv7: https://github.com/WongKinYiu/yolov7
+YOLOv7: https://github.com/WongKinYiu/yolov7 and
 YOLOv4-CSP: https://github.com/WongKinYiu/ScaledYOLOv4
