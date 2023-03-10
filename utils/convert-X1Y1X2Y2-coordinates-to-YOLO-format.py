@@ -1,11 +1,7 @@
 import os
 import cv2
-import imutils
 from tqdm import tqdm
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from PIL import Image
 
 annotPath = "path to annotation file containing image paths and X1Y1X2Y2 coordinates"
 savePath = "path to save labels .txt"
