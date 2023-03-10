@@ -39,21 +39,15 @@ for ID in tqdm(IDs):
     for count, (idx, row) in enumerate(dfObj.iterrows()):
       filePath = row["filePath"]
         if filePath == ID:
-            try:
-                img = cv2.imread(filePath)
-                
-                #image = cv2.imwrite(savePath+'/{}.jpg'.format(fileName), img)
-                label = row["label"]
-                x1 = row["startX"]
-                y1 = row["startY"]
-                x2 = row["endX"]
-                y2 = row["endY"]
-                (x, y, w, h) = convert(height, width, x1, x2, y1, y2)
-                #print(label, x, y, w, h)
-                dictn = {"label": label, "x": x, "y": y, "w": w, "h": h}
-                df = df.append([dictn], ignore_index=True)
-            except Exception as e:
-                print(e)
-                pass
-            
-    df.to_csv(savePath+"/{}.txt".format(fileName), header=False, index=False, sep=' ', mode='w')
+            label = row["label"]
+            x1 = row["startX"]
+            y1 = row["startY"]
+            x2 = row["endX"]
+            y2 = row["endY"]
+            (x, y, w, h) = convert(height, width, x1, x2, y1, y2)     
+            dictn = {"label": label, "x": x, "y": y, "w": w, "h": h}
+            df = df.append([dictn], ignore_index=True)
+  except Exception as e:
+    print(e)
+    pass
+df.to_csv(savePath+"/{}.txt".format(fileName), header=False, index=False, sep=' ', mode='w')
