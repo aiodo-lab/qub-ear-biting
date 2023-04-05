@@ -22,11 +22,12 @@ def save_frame(video_path, save_dir):
         if ret == False:
             cap.release()
             break
+        # mask upper region of each frame to cover adjoining pen
         mask = np.zeros(frame.shape[:2], dtype = "uint8")
         cv2.rectangle(mask, (0, 200), (1920, 1080), 255, -1) 
         newImage = cv2.bitwise_and(frame, frame, mask = mask)
-        #newImage = imutils.resize(newImage, width=640)
         
+        # save the frame to disk 
         cv2.imwrite(f"{save_path}/{idx}.png", newImage)
         idx += 1
 
