@@ -3,8 +3,8 @@ import cv2
 from tqdm import tqdm
 import pandas as pd
 
-annotPath = "path to annotation file containing image paths and X1Y1X2Y2 coordinates"
-savePath = "path to save labels .txt"
+annotPath = "/home/anicetusodo/detection-projects/utils/bboxes.csv"
+savePath = "/home/anicetusodo/detection-projects/utils/Almeer-train-annots"
 
 dfObj = pd.read_csv(annotPath)
 print(dfObj[:2])
@@ -31,7 +31,7 @@ for ID in tqdm(IDs):
         img = cv2.imread(ID)
         height = int(img.shape[0])
         width = int(img.shape[1])
-        fileName = os.path.splitext(os.path.split(filePath)[1])[0]
+        fileName = os.path.splitext(os.path.split(ID)[1])[0]
         
         for count, (idx, row) in enumerate(dfObj.iterrows()):
             filePath = row["filePath"]
@@ -45,7 +45,8 @@ for ID in tqdm(IDs):
                 #print(label, x, y, w, h)
                 dictn = {"label": label, "x": x, "y": y, "w": w, "h": h}
                 df = df.append([dictn], ignore_index=True)
+        df.to_csv(savePath+"/{}.txt".format(fileName), header=False, index=False, sep=' ', mode='w')
     except Exception as e:
         print(e)
         pass
-    df.to_csv(savePath+"/{}.txt".format(fileName), header=False, index=False, sep=' ', mode='w')
+    
