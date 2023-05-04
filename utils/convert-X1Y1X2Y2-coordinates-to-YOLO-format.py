@@ -33,7 +33,7 @@ for ID in tqdm(IDs):
     fileName = os.path.splitext(os.path.split(filePath)[1])[0] 
     df = pd.DataFrame()
     for count, (idx, row) in enumerate(dfObj.iterrows()):
-      filePath = row["filePath"]
+        filePath = row["filePath"]
         if filePath == ID:
             label = row["label"]
             x1 = row["startX"]
