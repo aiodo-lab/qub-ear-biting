@@ -26,24 +26,28 @@ def convert(h, w, x1, x2, y1, y2):
 IDs = dfObj['filePath'].unique().tolist()
 
 for ID in tqdm(IDs):
-  try:
-    img = cv2.imread(ID)
-    height = int(img.shape[0])
-    width = int(img.shape[1])
-    fileName = os.path.splitext(os.path.split(filePath)[1])[0] 
+    
     df = pd.DataFrame()
     for count, (idx, row) in enumerate(dfObj.iterrows()):
         filePath = row["filePath"]
         if filePath == ID:
-            label = row["label"]
-            x1 = row["startX"]
-            y1 = row["startY"]
-            x2 = row["endX"]
-            y2 = row["endY"]
-            (x, y, w, h) = convert(height, width, x1, x2, y1, y2)     
-            dictn = {"label": label, "x": x, "y": y, "w": w, "h": h}
-            df = df.append([dictn], ignore_index=True)
-  except Exception as e:
-    print(e)
-    pass
-df.to_csv(savePath+"/{}.txt".format(fileName), header=False, index=False, sep=' ', mode='w')
+            try:
+                img = cv2.imread(filePath)
+                height = int(img.shape[0])
+                width = int(img.shape[1])
+                fileName = os.path.splitext(os.path.split(filePath)[1])[0]
+                #image = cv2.imwrite(savePath+'/{}.jpg'.format(fileName), img)
+                label = row["label"]
+                x1 = row["startX"]
+                y1 = row["startY"]
+                x2 = row["endX"]
+                y2 = row["endY"]
+                (x, y, w, h) = convert(height, width, x1, x2, y1, y2)
+                #print(label, x, y, w, h)
+                dictn = {"label": label, "x": x, "y": y, "w": w, "h": h}
+                df = df.append([dictn], ignore_index=True)
+            except Exception as e:
+                print(e)
+                pass
+            
+    df.to_csv(savePath+"/{}.txt".format(fileName), header=False, index=False, sep=' ', mode='w')
