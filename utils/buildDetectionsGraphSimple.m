@@ -92,8 +92,8 @@ function [linkGraph,linkIndexGraph,nTotalLinks,detections,appearanceModels] = bu
                     
                     timeGap = thisFrameDetections(j,1) - prevFrameDetections(i,1);
 
-                    DetNumPrev = prevFrameDetections(i,12); % from 8 - 12
-                    DetNumThis = thisFrameDetections(j,12); % from 8 - 12
+                    DetNumPrev = prevFrameDetections(i,12); % changed index from 8 - 12
+                    DetNumThis = thisFrameDetections(j,12); % changed index from 8 - 12
                     costAppearance = 1 - sum(sqrt(appearanceModels(DetNumPrev,:) .* appearanceModels(DetNumThis,:)));                     
                                                              
                     %max allowed speed is relative to the bounding box size
