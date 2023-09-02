@@ -1,3 +1,8 @@
+# This code solves a LAP (Linear assignment problem) to associate ear biting events with pig in each frame
+# it can handle multiple events and multiple pigs in each frame
+# https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html
+# https://en.wikipedia.org/wiki/Assignment_problem
+
 from scipy.optimize import linear_sum_assignment
 import numpy as np
 import csv
