@@ -1,5 +1,3 @@
-import os
-import cv2
 from tqdm import tqdm
 import pandas
 import numpy as np
@@ -11,7 +9,6 @@ dfObj = pandas.read_csv(annotPath)
 IDs = dfObj['Source'].unique().tolist()
 
 for ID in tqdm(IDs):
-    df = pandas.DataFrame()
     try:
         fileName = str(ID).zfill(3)  
         bboxes = []
@@ -23,14 +20,11 @@ for ID in tqdm(IDs):
                 x1 = row["Column2"]
                 y1 = row["Column3"]
                 w = row["Column4"]
-                h = row["Column5"]
-                      
-                dictn = (label, x1, y1, w, h) 
-                bboxes.append(dictn)
-        # from the numpy module
+                h = row["Column5"]            
+                box = (label, x1, y1, w, h) 
+                bboxes.append(box)
+        # from numpy
         np.savetxt(savePath+"/{}.txt".format(fileName), bboxes, delimiter =" ", fmt ='% s')
-
-        # df.to_csv(savePath+"/{}.txt".format(fileName), header=False, index=True, sep=' ', mode='w')
     except Exception as e:
         print(e)
         pass
